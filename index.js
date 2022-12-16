@@ -5,8 +5,8 @@ const { viewAllDepartments } = require('./db/departments');
 const { viewAllEmployees } = require('./db/employees');
 
 
-const start = async () => {
-    console.log("Welcome to the Employee Manager!");
+const start = async (s) => {
+    if (s)  console.log("Welcome to the Employee Manager!");
     const { choice } = await prompt([
         {
             type: 'list',
@@ -39,8 +39,8 @@ const start = async () => {
             console.log('Goodbye');
             process.exit();
             
-
     }
+    start(false);
 }
 
-start();
+start(true);
