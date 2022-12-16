@@ -2,7 +2,7 @@
 const { prompt } = require("inquirer");
 const db = require("./db/connection");
 const { viewAllDepartments } = require('./db/departments');
-const { viewAllEmployees } = require('./db/employees');
+const { viewAllEmployees, addEmployee } = require('./db/employees');
 
 
 const start = async (s) => {
@@ -10,7 +10,7 @@ const start = async (s) => {
     const { choice } = await prompt([
         {
             type: 'list',
-            name: 'choices',
+            name: 'choice',
             message: 'what would you like to do?',
             choices: [
                 'View all departments',
@@ -34,6 +34,10 @@ const start = async (s) => {
         case 'View all employees':
             const employees = await viewAllEmployees()
             console.table(employees)
+            break;
+        case 'Add an employee':
+            const newEmployees = await addEmployee()
+            console.table(newEmployees)
             break;
         case 'Exit':
             console.log('Goodbye');

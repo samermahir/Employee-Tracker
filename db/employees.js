@@ -4,7 +4,7 @@ const db = require("./connection");
 async function viewAllEmployees() {
     try {
       const employees = 
-        await db.query("SELECT * FROM employee")
+        await db.query("SELECT * FROM employee LEFT JOIN role ON role.id = employee.role_id")
 
       return employees;
     } catch (err) {
@@ -13,6 +13,7 @@ async function viewAllEmployees() {
 }
 
 async function addEmployee() {
+    try {
     const {
         firstName,
         lastName
@@ -29,9 +30,15 @@ async function addEmployee() {
         }
     ])
 
-    await db.query('INSERT into')
+    await db.query(`INSERT into employee (first_name, last_name) VALUES ("${firstName}", "${lastName})"`)
+    const newEmployees = await viewAllEmployees()
+
+    return newEmployees;
+  } catch (err) {
+    console.log(err);
 }
 
+} 
 module.exports = { 
     viewAllEmployees,
     addEmployee
