@@ -14,9 +14,11 @@ async function viewAllEmployees() {
 
 async function addEmployee() {
     try {
+    const roles = await viewAllRoles();
     const {
         firstName,
-        lastName
+        lastName,
+        role
     } = await inquirer.prompt([
         {
             type: "input",
@@ -27,10 +29,20 @@ async function addEmployee() {
             type: "input",
             name: "lastName",
             message: "What is the employee's last name?"
+        },
+        {
+            type: 'list',
+            name: 'role',
+            choices: roles.map(role => {
+                return {
+                    value: role.id,
+                    name: role.title
+                }
+            })
         }
     ])
 
-    await db.query(`INSERT into employee (first_name, last_name) VALUES ("${firstName}", "${lastName})"`)
+    await db.query(`INSERT into employee (first_name, last_name, role_id) VALUES ("${firstName}", "${lastName})", ${role}`)
     const newEmployees = await viewAllEmployees()
 
     return newEmployees;
@@ -41,5 +53,5 @@ async function addEmployee() {
 } 
 module.exports = { 
     viewAllEmployees,
-    addEmployee
+    addEmployee,
 }
