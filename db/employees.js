@@ -15,10 +15,13 @@ async function viewAllEmployees() {
 async function addEmployee() {
     try {
     const roles = await viewAllRoles();
+    const employees = await viewAllEmployees();
     const {
         firstName,
         lastName,
-        role
+        role,
+        manager
+        
     } = await inquirer.prompt([
         {
             type: "input",
@@ -59,7 +62,7 @@ async function addEmployee() {
         }
     ])
 
-    await db.query(`INSERT into employee (first_name, last_name, role_id) VALUES ("${firstName}", "${lastName})", ${role}, ${manager})`)
+    await db.query(`INSERT into employee (first_name, last_name, role_id, manager_id) VALUES ("${firstName}", "${lastName})", ${role}, ${manager})`)
     const newEmployees = await viewAllEmployees()
 
     return newEmployees;

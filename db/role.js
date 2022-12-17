@@ -2,10 +2,10 @@ const db = require("./connection");
 
 async function viewAllRoles() {
     try {
-      const role = 
+      const roles = 
         await db.query("SELECT * FROM role")
 
-      return role
+      return roles
     } catch (err) {
         console.log(err);
     }
