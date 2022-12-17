@@ -40,6 +40,10 @@ const start = async (s) => {
             const newEmployees = await addEmployee()
             console.table(newEmployees)
             break;
+        case 'View all roles':
+            const role = await viewAllRoles()
+            console.table(role)
+            break;
         // case 'Add a role':
         //     const newRoles = await addRole()
         //     console.table(newRoles)

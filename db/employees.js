@@ -39,10 +39,27 @@ async function addEmployee() {
                     name: role.title
                 }
             })
+        },
+        {
+            type: 'list',
+            name: 'manager',
+            message: "Who is the employee's manager?",
+            choices: [
+            ...employees.map(employee => {
+                return {
+                    value: employee.id,
+                    name:  `${employee.first_name} ${employee.last_name}`
+                }
+            }),
+            {
+                value: null,
+                name: 'No manager',
+            }
+        ]
         }
     ])
 
-    await db.query(`INSERT into employee (first_name, last_name, role_id) VALUES ("${firstName}", "${lastName})", ${role}`)
+    await db.query(`INSERT into employee (first_name, last_name, role_id) VALUES ("${firstName}", "${lastName})", ${role}, ${manager})`)
     const newEmployees = await viewAllEmployees()
 
     return newEmployees;
