@@ -3,7 +3,7 @@ const { prompt } = require("inquirer");
 const db = require("./db/connection");
 const { viewAllDepartments } = require('./db/departments');
 const { viewAllEmployees, addEmployee } = require('./db/employees');
-const { viewAllRoles } = require('./db/role');
+const { viewAllRoles, addRole } = require('./db/role');
 
 
 const start = async (s) => {
@@ -32,6 +32,7 @@ const start = async (s) => {
             const departments = await viewAllDepartments()
             console.table(departments)
             break;
+
         case 'View all employees':
             const employees = await viewAllEmployees()
             console.table(employees)
@@ -41,13 +42,17 @@ const start = async (s) => {
             const roles = await viewAllRoles()
             console.table(roles)
             break;
+
         case 'Add an employee':
             const newEmployees = await addEmployee()
             console.table(newEmployees)
             break;
-        // case 'Add a role':
-        //     const newRoles = await addRole()
-        //     console.table(newRoles)
+
+        case 'Add a role':
+            const newRoles = await addRole()
+            console.table(newRoles)
+            break;
+
         case 'Exit':
             console.log('Goodbye');
             process.exit();
