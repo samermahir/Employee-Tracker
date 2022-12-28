@@ -1,5 +1,6 @@
 const { default: inquirer } = require("inquirer");
 const db = require("./connection");
+const { viewAllRoles } = require("./roles");
 
 async function viewAllEmployees() {
     try {
@@ -19,8 +20,8 @@ async function addEmployee() {
     const {
         firstName,
         lastName,
-        role,
-        manager
+        role_id,
+        manager_id
         
     } = await inquirer.prompt([
         {
@@ -36,6 +37,7 @@ async function addEmployee() {
         {
             type: 'list',
             name: 'role',
+            message: "Employees role?",
             choices: roles.map(role => {
                 return {
                     value: role.id,
@@ -62,7 +64,7 @@ async function addEmployee() {
         }
     ])
 
-    await db.query(`INSERT into employee (first_name, last_name, role_id, manager_id) VALUES ("${firstName}", "${lastName})", ${role}, ${manager})`)
+    await db.query(`INSERT into employee (first_name, last_name, role_id, manager_id) VALUES ("${firstName}", "${lastName})", ${role_id}, ${manager_id})`)
     const newEmployees = await viewAllEmployees()
 
     return newEmployees;
