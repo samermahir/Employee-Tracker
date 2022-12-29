@@ -53,6 +53,11 @@ const start = async (s) => {
             console.table(newRoles)
             break;
 
+        case 'Update employee role':
+            const updateEmployeeRole = await updateRole()
+            console.table(updateEmployeeRole)
+            break;
+
         case 'Exit':
             console.log('Goodbye');
             process.exit();

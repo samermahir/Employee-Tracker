@@ -20,8 +20,8 @@ async function addEmployee() {
     const {
         firstName,
         lastName,
-        role_id,
-        manager_id
+        role,
+        manager
         
     } = await inquirer.prompt([
         {
@@ -64,7 +64,7 @@ async function addEmployee() {
         }
     ])
 
-    await db.query(`INSERT into employee (first_name, last_name, role_id, manager_id) VALUES ("${firstName}", "${lastName})", ${role_id}, ${manager_id})`)
+    await db.query(`INSERT into employee (first_name, last_name, role_id, manager_id) VALUES ("${firstName}", "${lastName})", ${role}, ${manager})`)
     const newEmployees = await viewAllEmployees()
 
     return newEmployees;

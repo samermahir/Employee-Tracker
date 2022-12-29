@@ -1,5 +1,6 @@
 const { default: inquirer } = require("inquirer");
 const db = require("./connection");
+const { viewAllDepartments } = require("./departments");
 
 async function viewAllRoles() {
     try {
@@ -14,7 +15,7 @@ async function viewAllRoles() {
 
 async function addRole() {
         try {
-        const roles= await viewAllRoles();
+        const department= await viewAllDepartments();
         const {
             title,
             salary,
@@ -35,10 +36,10 @@ async function addRole() {
                 type: "list",
                 name: "department_id",
                 message: "What is the department of the employee?",
-                choices: roles.map(role => {
+                choices: department.map(department => {
                     return {
-                        value: role.id,
-                        name: role.department_id
+                        value: department.id,
+                        name: department.name
                     }
                 })
             }
