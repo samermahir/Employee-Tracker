@@ -20,12 +20,13 @@ async function addDepartments() {
     } = await inquirer.prompt([
         {
             type: "input",
-            name: "name",
+            name: "department",
             message: "What department do you want to add?"
         }
       ])
-      await db.query(`INSERT into employee (first_name, last_name, role_id, manager_id) VALUES ("${name}")`)
-      const newDepartments = await viewAllDepartments
+      await db.query(`INSERT into department (name) VALUES ("${name}")`)
+
+      const newDepartments = await viewAllDepartments();
       return newDepartments 
     }catch(err) {
       console.log(err)

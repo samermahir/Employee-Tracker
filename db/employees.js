@@ -1,11 +1,11 @@
 const { default: inquirer } = require("inquirer");
 const db = require("./connection");
-const { viewAllRoles } = require("./roles");
+const { viewAllRoles } = require("./role");
 
 async function viewAllEmployees() {
     try {
       const employees = 
-        await db.query("SELECT * FROM employee LEFT JOIN role ON role.id = employee.role_id")
+        await db.query("SELECT * FROM employee.id, employee.first_name, employee.last_name, role.title, role.salary, employee.manager_id FROM employee LEFT JOIN role ON role.id = employee.role_id")
 
       return employees;
     } catch (err) {
@@ -65,6 +65,7 @@ async function addEmployee() {
     ])
 
     await db.query(`INSERT into employee (first_name, last_name, role_id, manager_id) VALUES ("${firstName}", "${lastName})", ${role}, ${manager})`)
+
     const newEmployees = await viewAllEmployees()
 
     return newEmployees;

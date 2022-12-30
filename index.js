@@ -1,7 +1,7 @@
 
 const { prompt } = require("inquirer");
 const db = require("./db/connection");
-const { viewAllDepartments } = require('./db/departments');
+const { viewAllDepartments, addDepartments } = require('./db/departments');
 const { viewAllEmployees, addEmployee } = require('./db/employees');
 const { viewAllRoles, addRole } = require('./db/role');
 
@@ -47,6 +47,10 @@ const start = async (s) => {
             const newEmployees = await addEmployee()
             console.table(newEmployees)
             break;
+
+        case 'Add new department':
+            const newDepartments = await addDepartments()
+            console.table(newDepartments)
 
         case 'Add a role':
             const newRoles = await addRole()

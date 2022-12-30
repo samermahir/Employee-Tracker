@@ -4,10 +4,10 @@ const { viewAllDepartments } = require("./departments");
 
 async function viewAllRoles() {
     try {
-      const roles = 
-        await db.query("SELECT * FROM role")
+      const role = 
+        await db.query("SELECT  role.id, title, salary, department_id FROM role LEFT JOIN department ON role.department_id = department.id")
 
-      return roles
+      return role
     } catch (err) {
         console.log(err);
     }
@@ -46,9 +46,9 @@ async function addRole() {
         ]);  
 
         await db.query(`INSERT into role (title, salary, department_id) VALUES (${title}, ${salary}, ${department_id})`)
-        const addRole = await viewAllRoles()
+        const newRole = await viewAllRoles()
         
-        return addRole;
+        return newRole;
           } catch (err) {
             console.log(err);
           }
