@@ -1,5 +1,5 @@
 const db = require("./connection");
-const { default: inquirer } = require("inquirer");
+const { prompt } = require("inquirer");
 
 async function viewAllDepartments() {
     try {
@@ -14,10 +14,10 @@ async function viewAllDepartments() {
 
 async function addDepartments() {
   try {
-    const departments = await viewAllDepartments();
+    // const departments = await viewAllDepartments();
     const {
-        name,    
-    } = await inquirer.prompt([
+        name    
+    } = await prompt([
         {
             type: "input",
             name: "department",
