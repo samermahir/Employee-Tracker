@@ -26,12 +26,12 @@ async function addEmployee() {
     } = await prompt([
         {
             type: "input",
-            name: "firstName",
+            name: "first_Name",
             message: "What is the employee's first name?"
         },
         {
             type: "input",
-            name: "lastName",
+            name: "last_Name",
             message: "What is the employee's last name?"
         },
         {
@@ -74,7 +74,47 @@ async function addEmployee() {
 }
 
 } 
+
+async function updateRole() {
+    const moveEmployee = await viewAllEmployees();
+    const updateRole = await viewAllRoles();
+    try {
+    const {
+        employee, newRole
+    } = await prompt([
+        {
+            type: "list",
+            name: "employee",
+            message: "Employee that you would like to update",
+            choices: moveEmployee.map((employee) => {
+                return {
+                    name: `${employee.first_name} ${employee.last_name}`,
+                    value: employee.id
+                }
+            })
+        },
+        {
+            type: "list",
+            name: "new position",
+            message: "What is the new position",
+            choices: updateRole.map((role) => {
+                return {
+                    name: role.title,
+                    value: role.id
+                }
+            })
+        }
+    ])
+
+    await db.query(`UPDATE employee SET role_id = ("${updateRole}") where id = ("${moveEmployee}"`)
+    const updateEmployeeRole = await viewAllEmployees();
+    return updateEmployeeRole; 
+}catch (err) {
+    console.log(err)
+}
+}
 module.exports = { 
     viewAllEmployees,
     addEmployee,
+    updateRole,
 }
