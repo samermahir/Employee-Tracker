@@ -2,7 +2,7 @@
 const { prompt } = require("inquirer");
 const db = require("./db/connection");
 const { viewAllDepartments, addDepartments } = require('./db/departments');
-const { viewAllEmployees, addEmployee } = require('./db/employees');
+const { viewAllEmployees, addEmployee, updateRole } = require('./db/employees');
 const { viewAllRoles, addRole } = require('./db/role');
 
 

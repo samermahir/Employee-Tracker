@@ -95,7 +95,7 @@ async function updateRole() {
         },
         {
             type: "list",
-            name: "new position",
+            name: "newRole",
             message: "What is the new position",
             choices: updateRole.map((role) => {
                 return {
@@ -106,7 +106,7 @@ async function updateRole() {
         }
     ])
 
-    await db.query(`UPDATE employee SET role_id = ("${updateRole}") where id = ("${moveEmployee}"`)
+    await db.query(`UPDATE employee SET role_id = (${newRole}) WHERE id = (${employee}`)
     const updateEmployeeRole = await viewAllEmployees();
     return updateEmployeeRole; 
 }catch (err) {
@@ -116,5 +116,5 @@ async function updateRole() {
 module.exports = { 
     viewAllEmployees,
     addEmployee,
-    updateRole,
+    updateRole
 }
