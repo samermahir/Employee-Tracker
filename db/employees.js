@@ -5,7 +5,7 @@ const { viewAllRoles } = require("./role");
 async function viewAllEmployees() {
     try {
       const employees = 
-        await db.query("SELECT * FROM employee LEFT JOIN role ON role.id = employee.role_id")
+        await db.query("SELECT * FROM employee LEFT JOIN role ON employee.role_id = role.id LEFT JOIN department ON role.department_id = department.id")
 
       return employees;
     } catch (err) {
@@ -76,9 +76,10 @@ async function addEmployee() {
 } 
 
 async function updateRole() {
-    const moveEmployee = await viewAllEmployees();
-    const updateRole = await viewAllRoles();
     try {
+    const updateEmployee = await viewAllEmployees();
+    const updateRole = await viewAllRoles();
+    
     const {
         employee, newRole
     } = await prompt([
@@ -86,7 +87,7 @@ async function updateRole() {
             type: "list",
             name: "employee",
             message: "Employee that you would like to update",
-            choices: moveEmployee.map((employee) => {
+            choices: updateEmployee.map((employee) => {
                 return {
                     name: `${employee.first_name} ${employee.last_name}`,
                     value: employee.id
