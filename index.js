@@ -17,10 +17,10 @@ const start = async (s) => {
                 'View all departments',
                 'View all roles',
                 'View all employees',
-                'Add a department',
+                'Add new department',
                 'Add a role',
                 'Add an employee',
-                'Update an employee role',
+                'Update employee role',
                 'Exit'
             ]
         }
