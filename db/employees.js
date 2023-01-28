@@ -107,7 +107,7 @@ async function updateRole() {
         }
     ])
 
-    await db.query(`UPDATE employee SET role_id = (${newRole}) WHERE id = (${employee}`)
+    await db.query(`UPDATE employee SET role_id = (${newRole}) WHERE id = (${employee})`)
     const updateEmployeeRole = await viewAllEmployees();
     return updateEmployeeRole; 
 }catch (err) {
